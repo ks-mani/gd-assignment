@@ -26,7 +26,6 @@ const ListCard = () => {
 };
 
 function App() {
-  console.log(styles);
   return (
     <WidgetContainer>
       <h1>List of GoDaddy's Github Repo</h1>
