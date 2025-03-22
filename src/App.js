@@ -12,6 +12,12 @@ const ListCard = ({
     visibility = "",
   },
 }) => {
+  const localeDate = new Date(updatedAt).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <div className={styles.listCardWrapper}>
       <div className={styles.title}>
@@ -24,7 +30,7 @@ const ListCard = ({
       <div className={styles.meta}>
         <span className={styles.lang}>{language}</span>
         <span className={styles.dot}></span>
-        <span className={styles.updated}>Updated on {updatedAt}</span>
+        <span className={styles.updated}>Updated on {localeDate}</span>
       </div>
     </div>
   );
@@ -49,7 +55,6 @@ function App() {
           };
         });
 
-        console.log(formattedData);
         setData(formattedData);
       });
   }, []);
