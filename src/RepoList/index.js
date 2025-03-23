@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import ArrowRight from "../images/arrow-right.png";
 import { useMinRepoDataStore } from "../store/repoData";
 import useFetchRepoData from "../hooks/useFetchRepoData";
+import { convertToLocaleDate } from "../utils";
 
 const ListCard = ({
   navigateCb = () => {},
@@ -20,11 +21,7 @@ const ListCard = ({
 }) => {
   const containerRef = useRef(null);
 
-  const localeDate = new Date(updatedAt).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const localeDate = convertToLocaleDate(updatedAt);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

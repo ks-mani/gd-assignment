@@ -13,5 +13,28 @@
   }
 
   .detailsViewContent {
+    > .repoMeta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      column-gap: 30px;
+
+      @media screen and (max-width: $screen-md-max) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      > .dates {
+        > span {
+          display: block;
+          margin-top: 20px;
+          text-align: right;
+
+          @media screen and (max-width: $screen-md-max) {
+            text-align: left;
+          }
+        }
+      }
+    }
   }
 }

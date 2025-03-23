@@ -3,7 +3,7 @@ import WidgetContainer from "../WidgetContainer";
 import { useFullRepoDataStore } from "../store/repoData";
 import useFetchRepoData from "../hooks/useFetchRepoData";
 import { useEffect, useState } from "react";
-import { checkIfObjectIsEmpty } from "../utils";
+import { checkIfObjectIsEmpty, convertToLocaleDate } from "../utils";
 import Layer from "../Layer";
 
 import styles from "./index.module.scss";
@@ -43,8 +43,21 @@ const RepoDetail = () => {
         ) : (
           <Layer>
             <div className={styles.detailsViewContent}>
-              <h1>{detailsData.full_name}</h1>
-              <span className="tag">public</span>
+              <div className={styles.repoMeta}>
+                <div>
+                  <h1>{detailsData.full_name}</h1>
+                  <span className="tag">public</span>
+                </div>
+                <div className={styles.dates}>
+                  <span>
+                    Created at {convertToLocaleDate(detailsData.created_at)}
+                  </span>
+                  <span>
+                    Updated at {convertToLocaleDate(detailsData.updated_at)}{" "}
+                  </span>
+                </div>
+              </div>
+
               <hr />
               <p>{detailsData.description}</p>
             </div>
