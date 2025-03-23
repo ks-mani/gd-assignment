@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import WidgetContainer from "../WidgetContainer";
+import { useNavigate } from "react-router";
 
 const ListCard = ({
+  navigateCb = () => {},
   cardData: {
+    id = "",
     name = "",
     description = "",
     language = "",
@@ -45,7 +48,13 @@ const ListCard = ({
   }, []);
 
   return (
-    <div className={styles.listCardWrapper} ref={containerRef}>
+    <div
+      className={styles.listCardWrapper}
+      ref={containerRef}
+      onClick={() => {
+        navigateCb(`/repo-detail/${id}`);
+      }}
+    >
       <div className={styles.title}>
         <h2>{name}</h2>
         <span className={styles.tag}>{visibility}</span>
@@ -65,6 +74,8 @@ const ListCard = ({
 function RepoList() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://api.github.com/orgs/godaddy/repos")
@@ -92,7 +103,10 @@ function RepoList() {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        data && data.map((item) => <ListCard key={item.id} cardData={item} />)
+        data &&
+        data.map((item) => (
+          <ListCard key={item.id} cardData={item} navigateCb={navigate} />
+        ))
       )}
     </WidgetContainer>
   );
