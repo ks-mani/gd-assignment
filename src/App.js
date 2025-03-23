@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./App.module.scss";
 import WidgetContainer from "./WidgetContainer";
 
@@ -12,14 +12,40 @@ const ListCard = ({
     visibility = "",
   },
 }) => {
+  const containerRef = useRef(null);
+
   const localeDate = new Date(updatedAt).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <div className={styles.listCardWrapper}>
+    <div className={styles.listCardWrapper} ref={containerRef}>
       <div className={styles.title}>
         <h2>{name}</h2>
         <span className={styles.tag}>{visibility}</span>
