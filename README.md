@@ -19,3 +19,10 @@
 2. Zustand : A lightweight state management library to cache the response of the API call.
 3. Sass : To utilise the SCSS syntax for CSS styling
 
+---
+
+## Home Page Screenshot
+![Home Page Screenshot](/src/images/gd-1.jpg?raw=true "Home Page Screensho")
+
+## Details Page Screenshot
+![Details Page Screenshot](/src/images/gd-2.jpg?raw=true "Details Page Screensho")
