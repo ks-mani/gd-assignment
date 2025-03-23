@@ -44,9 +44,17 @@ const RepoDetail = () => {
           <Layer>
             <div className={styles.detailsViewContent}>
               <div className={styles.repoMeta}>
-                <div>
+                <div className={styles.title}>
                   <h1>{detailsData.full_name}</h1>
                   <span className="tag">public</span>
+                  <a
+                    className={styles.githubLink}
+                    href={detailsData.html_url}
+                    target="_blank"
+                    rel="noreferrer noopener nofollow"
+                  >
+                    Visit github page
+                  </a>
                 </div>
                 <div className={styles.dates}>
                   <span>
