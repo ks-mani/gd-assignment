@@ -38,6 +38,7 @@ const ListCard = ({
 
 function App() {
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://api.github.com/orgs/godaddy/repos")
@@ -55,13 +56,18 @@ function App() {
           };
         });
 
+        setIsLoading(false);
         setData(formattedData);
       });
   }, []);
   return (
     <WidgetContainer>
       <h1>List of GoDaddy's Github Repo</h1>
-      {data && data.map((item) => <ListCard key={item.id} cardData={item} />)}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        data && data.map((item) => <ListCard key={item.id} cardData={item} />)
+      )}
     </WidgetContainer>
   );
 }
