@@ -3,6 +3,8 @@ import styles from "./index.module.scss";
 import WidgetContainer from "../WidgetContainer";
 import { useNavigate } from "react-router";
 
+import ArrowRight from "../images/arrow-right.png";
+
 const ListCard = ({
   navigateCb = () => {},
   cardData: {
@@ -62,10 +64,15 @@ const ListCard = ({
 
       <hr />
       <p>{description}</p>
-      <div className={styles.meta}>
-        <span className={styles.lang}>{language}</span>
-        <span className={styles.dot}></span>
-        <span className={styles.updated}>Updated on {localeDate}</span>
+
+      <div className={styles.footer}>
+        <div className={styles.meta}>
+          <span className={styles.lang}>{language}</span>
+          <span className={styles.dot}></span>
+          <span className={styles.updated}>Updated on {localeDate}</span>
+        </div>
+
+        <img className={styles.arrow} src={ArrowRight} alt="Arrow Right" />
       </div>
     </div>
   );

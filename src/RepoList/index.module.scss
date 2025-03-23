@@ -1,6 +1,7 @@
 @use "../variables.scss" as *;
 
 .listCardWrapper {
+  position: relative;
   margin: 35px 0;
   padding: 30px 40px;
   box-shadow: 0 0 30px 0 rgb(218, 218, 218);
@@ -87,43 +88,54 @@
     }
   }
 
-  > .meta {
+  > .footer {
     margin-top: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-start;
+    column-gap: 20px;
 
-    span {
-      display: inline-block;
+    > .meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      span {
+        display: inline-block;
+      }
+
+      > .lang,
+      .updated {
+        font-weight: 700;
+
+        @media screen and (max-width: $screen-sm-max) {
+          font-size: 16px;
+        }
+
+        @media screen and (min-width: $screen-sm-max) and (max-width: $screen-md-max) {
+          font-size: 16px;
+        }
+
+        @media screen and (min-width: $screen-md-max) and (max-width: $screen-lg-max) {
+          font-size: 18px;
+        }
+
+        @media screen and (min-width: $screen-lg-max) {
+          font-size: 18px;
+        }
+      }
+
+      > .dot {
+        margin: 0 20px;
+        width: 8px;
+        aspect-ratio: 1;
+        border-radius: 50px;
+        background-color: var(--tertiary-color);
+      }
     }
 
-    > .lang,
-    .updated {
-      font-weight: 700;
-
-      @media screen and (max-width: $screen-sm-max) {
-        font-size: 16px;
-      }
-
-      @media screen and (min-width: $screen-sm-max) and (max-width: $screen-md-max) {
-        font-size: 16px;
-      }
-
-      @media screen and (min-width: $screen-md-max) and (max-width: $screen-lg-max) {
-        font-size: 18px;
-      }
-
-      @media screen and (min-width: $screen-lg-max) {
-        font-size: 18px;
-      }
-    }
-
-    > .dot {
-      margin: 0 20px;
-      width: 8px;
-      aspect-ratio: 1;
-      border-radius: 50px;
-      background-color: var(--tertiary-color);
+    > .arrow {
+      width: 40px;
     }
   }
 }
