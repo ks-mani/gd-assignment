@@ -8,6 +8,15 @@ import Layer from "../Layer";
 
 import styles from "./index.module.scss";
 
+const RepoInfoCard = ({ title, value }) => {
+  return (
+    <div className={styles.repoInfoCard}>
+      <span className={styles.repoInfoKey}>{title}</span>
+      <span className={styles.repoInfoValue}>{value}</span>
+    </div>
+  );
+};
+
 const RepoDetail = () => {
   const { repoId } = useParams();
 
@@ -68,6 +77,21 @@ const RepoDetail = () => {
 
               <hr />
               <p>{detailsData.description}</p>
+
+              <div className={styles.repoInfo}>
+                <RepoInfoCard title="Size" value={`${detailsData.size}KB`} />
+                <RepoInfoCard title="Language" value={detailsData.language} />
+                <RepoInfoCard title="Watchers" value={detailsData.watchers} />
+                <RepoInfoCard
+                  title="Stargazers"
+                  value={detailsData.stargazers_count}
+                />
+                <RepoInfoCard title="Forks Count" value={detailsData.forks} />
+                <RepoInfoCard
+                  title="Open Issues"
+                  value={detailsData.open_issues}
+                />
+              </div>
             </div>
           </Layer>
         )}
