@@ -26,3 +26,13 @@
 
 ## Details Page Screenshot
 ![Details Page Screenshot](/src/images/gd-2.jpg?raw=true "Details Page Screensho")
+
+
+---
+
+# Feature enhancements
+Following features would have been added if given more time
+1. Search bar in home page to search for a specific repo
+2. Sorting Widget in home page to sort the cards according to a specific criteria
+3. Better scrolling animation
+4. More Test Cases
