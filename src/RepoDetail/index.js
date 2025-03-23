@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { checkIfObjectIsEmpty } from "../utils";
 import Layer from "../Layer";
 
+import styles from "./index.module.scss";
+
 const RepoDetail = () => {
   const { repoId } = useParams();
 
@@ -17,6 +19,7 @@ const RepoDetail = () => {
   useEffect(() => {
     const detailsData =
       fullRepoData?.find((item) => item.id.toString() === repoId) || {};
+    console.log(detailsData);
 
     setDetailsData(detailsData);
   }, [repoId, fullRepoData]);
@@ -29,15 +32,21 @@ const RepoDetail = () => {
     );
   } else {
     return (
-      <WidgetContainer>
-        <Link to="/">Go to Main Page</Link>
+      <WidgetContainer customWrapperClass={styles.detailViewWrapper}>
+        <Link to="/" className={styles.goBackLink}>
+          Go to Main Page
+        </Link>
         {checkIfObjectIsEmpty(detailsData) ? (
           <Layer>
             <p>Data pertaining to {repoId} does not exist</p>
           </Layer>
         ) : (
           <Layer>
-            <h1>Hello there.. This is the detail view of {repoId}</h1>
+            <div className={styles.detailsViewContent}>
+              <h1>{detailsData.full_name}</h1>
+              <hr />
+              <p>{detailsData.description}</p>
+            </div>
           </Layer>
         )}
       </WidgetContainer>

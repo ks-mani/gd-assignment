@@ -1,0 +1,17 @@
+@use "../variables.scss" as *;
+
+.detailViewWrapper {
+  .goBackLink {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    border: 2px solid var(--primary-color);
+    background-color: white;
+    color: var(--primary-color);
+    font-weight: 700;
+    border-radius: 10px;
+  }
+
+  .detailsViewContent {
+  }
+}
