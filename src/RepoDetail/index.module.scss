@@ -54,24 +54,57 @@
 
     > .repoInfo {
       display: grid;
-      column-gap: 20px;
-      row-gap: 20px;
       margin-top: 50px;
 
       @media screen and (max-width: $screen-sm-max) {
         grid-template-columns: 1fr;
+        row-gap: 40px;
       }
 
       @media screen and (min-width: $screen-sm-max) and (max-width: $screen-md-max) {
         grid-template-columns: 1fr 1fr;
+        column-gap: 40px;
+        row-gap: 40px;
       }
 
       @media screen and (min-width: $screen-md-max) and (max-width: $screen-lg-max) {
         grid-template-columns: 1fr 1fr;
+        column-gap: 70px;
+        row-gap: 50px;
       }
 
       @media screen and (min-width: $screen-lg-max) {
         grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 70px;
+        row-gap: 50px;
+      }
+
+      > .repoInfoCard {
+        box-shadow: 0 0 30px 0 rgb(218, 218, 218);
+        border-radius: 10px;
+        overflow: hidden;
+        > span {
+          display: block;
+        }
+
+        > .repoInfoKey,
+        .repoInfoValue {
+          padding: 10px 20px;
+          text-align: center;
+        }
+
+        > .repoInfoKey {
+          background-color: var(--primary-color);
+          font-size: 20px;
+          color: white;
+          font-weight: 700;
+        }
+
+        > .repoInfoValue {
+          font-size: 22px;
+          color: grey;
+          font-weight: 700;
+        }
       }
     }
   }
