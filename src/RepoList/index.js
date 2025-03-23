@@ -88,7 +88,7 @@ function RepoList() {
 
   return (
     <WidgetContainer>
-      <h1>List of GoDaddy's Github Repo</h1>
+      <h1 className={styles.pageTitle}>List of GoDaddy's Github Repo</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : (

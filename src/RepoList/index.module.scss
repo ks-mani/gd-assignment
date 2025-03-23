@@ -1,5 +1,9 @@
 @use "../variables.scss" as *;
 
+.pageTitle {
+  color: black;
+}
+
 .listCardWrapper {
   position: relative;
   margin: 35px 0;
