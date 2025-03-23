@@ -61,7 +61,7 @@ function App() {
   return (
     <WidgetContainer>
       <h1>List of GoDaddy's Github Repo</h1>
-      {data && data.map((item) => <ListCard cardData={item} />)}
+      {data && data.map((item) => <ListCard key={item.id} cardData={item} />)}
     </WidgetContainer>
   );
 }
