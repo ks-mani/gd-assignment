@@ -1,8 +1,13 @@
 import { create } from "zustand";
 
-const useRepoDataStore = create((set) => ({
-  repoData: null,
-  setRepoData: (data) => set((state) => ({ repoData: data })),
+const useFullRepoDataStore = create((set) => ({
+  fullRepoData: null,
+  setFullRepoData: (data) => set((state) => ({ fullRepoData: data })),
 }));
 
-export default useRepoDataStore;
+const useMinRepoDataStore = create((set) => ({
+  minRepoData: null,
+  setMinRepoData: (data) => set((state) => ({ minRepoData: data })),
+}));
+
+export { useFullRepoDataStore, useMinRepoDataStore };

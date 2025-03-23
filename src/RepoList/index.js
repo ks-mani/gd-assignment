@@ -4,7 +4,7 @@ import WidgetContainer from "../WidgetContainer";
 import { useNavigate } from "react-router";
 
 import ArrowRight from "../images/arrow-right.png";
-import useRepoDataStore from "../store/repoData";
+import { useFullRepoDataStore, useMinRepoDataStore } from "../store/repoData";
 
 const ListCard = ({
   navigateCb = () => {},
@@ -79,33 +79,37 @@ const ListCard = ({
 };
 
 function RepoList() {
-  const [repoDataMin, setRepoDataMin] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { setRepoData } = useRepoDataStore();
+  const { setFullRepoData } = useFullRepoDataStore();
+  const { minRepoData, setMinRepoData } = useMinRepoDataStore();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://api.github.com/orgs/godaddy/repos")
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedData = data.map((item) => {
-          return {
-            id: item.id,
-            name: item.name,
-            description: item.description,
-            language: item.language,
-            updatedAt: item.updated_at,
-            visibility: item.visibility,
-          };
-        });
+    if (!minRepoData) {
+      fetch("https://api.github.com/orgs/godaddy/repos")
+        .then((res) => res.json())
+        .then((data) => {
+          const formattedData = data.map((item) => {
+            return {
+              id: item.id,
+              name: item.name,
+              description: item.description,
+              language: item.language,
+              updatedAt: item.updated_at,
+              visibility: item.visibility,
+            };
+          });
 
-        setIsLoading(false);
-        setRepoDataMin(formattedData);
-        setRepoData(data);
-      });
-  }, [setRepoData]);
+          setIsLoading(false);
+          setMinRepoData(formattedData);
+          setFullRepoData(data);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, [minRepoData, setFullRepoData, setMinRepoData]);
 
   return (
     <WidgetContainer>
@@ -113,9 +117,9 @@ function RepoList() {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        repoDataMin &&
-        Array.isArray(repoDataMin) &&
-        repoDataMin.map((item) => (
+        minRepoData &&
+        Array.isArray(minRepoData) &&
+        minRepoData.map((item) => (
           <ListCard key={item.id} cardData={item} navigateCb={navigate} />
         ))
       )}
