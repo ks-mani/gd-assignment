@@ -1,26 +1,48 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import WidgetContainer from "../WidgetContainer";
 import { useFullRepoDataStore } from "../store/repoData";
 import useFetchRepoData from "../hooks/useFetchRepoData";
+import { useEffect, useState } from "react";
+import { checkIfObjectIsEmpty } from "../utils";
+import Layer from "../Layer";
 
 const RepoDetail = () => {
   const { repoId } = useParams();
-  const { fullRepoData } = useFullRepoDataStore();
 
   const isLoading = useFetchRepoData();
+  const { fullRepoData } = useFullRepoDataStore();
 
-  return (
-    <WidgetContainer>
-      <h1>Hello there.. This is the detail view of {repoId}</h1>
+  const [detailsData, setDetailsData] = useState(null);
 
-      <p>{isLoading ? "Yes.. Loading" : "Completed"}</p>
+  useEffect(() => {
+    const detailsData =
+      fullRepoData?.find((item) => item.id.toString() === repoId) || {};
 
-      {fullRepoData &&
-        JSON.stringify(
-          fullRepoData.filter((item) => item.id.toString() === repoId)
+    setDetailsData(detailsData);
+  }, [repoId, fullRepoData]);
+
+  if (isLoading || detailsData === null) {
+    return (
+      <WidgetContainer>
+        <p>Loading ...</p>
+      </WidgetContainer>
+    );
+  } else {
+    return (
+      <WidgetContainer>
+        <Link to="/">Go to Main Page</Link>
+        {checkIfObjectIsEmpty(detailsData) ? (
+          <Layer>
+            <p>Data pertaining to {repoId} does not exist</p>
+          </Layer>
+        ) : (
+          <Layer>
+            <h1>Hello there.. This is the detail view of {repoId}</h1>
+          </Layer>
         )}
-    </WidgetContainer>
-  );
+      </WidgetContainer>
+    );
+  }
 };
 
 export default RepoDetail;
