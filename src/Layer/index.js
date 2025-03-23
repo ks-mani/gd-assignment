@@ -2,7 +2,7 @@ const Layer = ({ children }) => {
   return (
     <div
       style={{
-        padding: "20px 30px",
+        padding: "20px 30px 40px",
         boxShadow: "0 0 30px 0 rgb(218, 218, 218)",
         margin: "20px 0",
       }}
