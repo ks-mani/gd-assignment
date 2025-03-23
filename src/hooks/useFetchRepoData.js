@@ -6,6 +6,8 @@ const useFetchRepoData = () => {
   const { minRepoData, setMinRepoData } = useMinRepoDataStore();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
 
   useEffect(() => {
     if (fullRepoData && minRepoData) {
@@ -30,9 +32,19 @@ const useFetchRepoData = () => {
           setIsLoading(false);
           setMinRepoData(formattedData);
           setFullRepoData(data);
+        })
+        .catch((e) => {
+          setHasError(true);
+          setErrMessage(e.message);
         });
     }
   }, [minRepoData, fullRepoData, setMinRepoData, setFullRepoData]);
+
+  useEffect(() => {
+    if (hasError) {
+      throw new Error(errMessage);
+    }
+  }, [hasError, errMessage]);
 
   return isLoading;
 };
