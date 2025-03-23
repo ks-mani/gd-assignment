@@ -4,6 +4,7 @@ import WidgetContainer from "../WidgetContainer";
 import { useNavigate } from "react-router";
 
 import ArrowRight from "../images/arrow-right.png";
+import useRepoDataStore from "../store/repoData";
 
 const ListCard = ({
   navigateCb = () => {},
@@ -13,7 +14,6 @@ const ListCard = ({
     description = "",
     language = "",
     updatedAt = "",
-    url = "",
     visibility = "",
   },
 }) => {
@@ -79,8 +79,10 @@ const ListCard = ({
 };
 
 function RepoList() {
-  const [data, setData] = useState(null);
+  const [repoDataMin, setRepoDataMin] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { setRepoData } = useRepoDataStore();
 
   const navigate = useNavigate();
 
@@ -95,23 +97,25 @@ function RepoList() {
             description: item.description,
             language: item.language,
             updatedAt: item.updated_at,
-            url: item.url,
             visibility: item.visibility,
           };
         });
 
         setIsLoading(false);
-        setData(formattedData);
+        setRepoDataMin(formattedData);
+        setRepoData(data);
       });
-  }, []);
+  }, [setRepoData]);
+
   return (
     <WidgetContainer>
       <h1>List of GoDaddy's Github Repo</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        data &&
-        data.map((item) => (
+        repoDataMin &&
+        Array.isArray(repoDataMin) &&
+        repoDataMin.map((item) => (
           <ListCard key={item.id} cardData={item} navigateCb={navigate} />
         ))
       )}
