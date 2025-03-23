@@ -58,10 +58,10 @@ const RepoDetail = () => {
                 </div>
                 <div className={styles.dates}>
                   <span>
-                    Created at {convertToLocaleDate(detailsData.created_at)}
+                    Created on {convertToLocaleDate(detailsData.created_at)}
                   </span>
                   <span>
-                    Updated at {convertToLocaleDate(detailsData.updated_at)}{" "}
+                    Updated on {convertToLocaleDate(detailsData.updated_at)}{" "}
                   </span>
                 </div>
               </div>
