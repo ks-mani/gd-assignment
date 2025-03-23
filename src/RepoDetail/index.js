@@ -44,6 +44,7 @@ const RepoDetail = () => {
           <Layer>
             <div className={styles.detailsViewContent}>
               <h1>{detailsData.full_name}</h1>
+              <span className="tag">public</span>
               <hr />
               <p>{detailsData.description}</p>
             </div>

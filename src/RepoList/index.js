@@ -60,7 +60,7 @@ const ListCard = ({
     >
       <div className={styles.title}>
         <h2>{name}</h2>
-        <span className={styles.tag}>{visibility}</span>
+        <span className={"tag"}>{visibility}</span>
       </div>
 
       <hr />
