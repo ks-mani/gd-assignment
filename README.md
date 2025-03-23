@@ -1,3 +1,21 @@
+# Steps to run the project
+
+1. Clone the repo `git clone https://github.com/ks-mani/gd-assignment.git`
+2. Go to the directory
+3. Run `npm install` command in the terminal
+4. Once all the packages are installed, run `npm run start` to run the project in development mode
+
+
+## In case the project is needed to run in production mode, then follow these steps
+1. Install "serve" package globally. (`npm install -g serve`)
+2. Run `npm run build`
+3. Run `serve -s build`
+
+---
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
