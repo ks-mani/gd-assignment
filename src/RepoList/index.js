@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import WidgetContainer from "../WidgetContainer";
 import { useNavigate } from "react-router";
 
 import ArrowRight from "../images/arrow-right.png";
-import { useFullRepoDataStore, useMinRepoDataStore } from "../store/repoData";
+import { useMinRepoDataStore } from "../store/repoData";
+import useFetchRepoData from "../hooks/useFetchRepoData";
 
 const ListCard = ({
   navigateCb = () => {},
@@ -79,37 +80,11 @@ const ListCard = ({
 };
 
 function RepoList() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { setFullRepoData } = useFullRepoDataStore();
-  const { minRepoData, setMinRepoData } = useMinRepoDataStore();
+  const { minRepoData } = useMinRepoDataStore();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!minRepoData) {
-      fetch("https://api.github.com/orgs/godaddy/repos")
-        .then((res) => res.json())
-        .then((data) => {
-          const formattedData = data.map((item) => {
-            return {
-              id: item.id,
-              name: item.name,
-              description: item.description,
-              language: item.language,
-              updatedAt: item.updated_at,
-              visibility: item.visibility,
-            };
-          });
-
-          setIsLoading(false);
-          setMinRepoData(formattedData);
-          setFullRepoData(data);
-        });
-    } else {
-      setIsLoading(false);
-    }
-  }, [minRepoData, setFullRepoData, setMinRepoData]);
+  const isLoading = useFetchRepoData();
 
   return (
     <WidgetContainer>
